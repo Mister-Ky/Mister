@@ -2,6 +2,7 @@
 
 namespace Mister.Utils.Cryptography
 {
+    //Beta class
     public sealed class Crc
     {
         public static byte[] AddCrc(byte[] data)

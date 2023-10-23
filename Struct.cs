@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace Mister.Framework
 {
-    // Структура для хранения сообщений
     [StructLayout(LayoutKind.Sequential)]
     public struct MSG
     {
@@ -29,7 +28,6 @@ namespace Mister.Framework
         public int cy;
     }
 
-    // Структура для хранения координат
     [StructLayout(LayoutKind.Sequential)]
     public struct POINT
     {
@@ -45,8 +43,7 @@ namespace Mister.Framework
         public int Right;
         public int Bottom;
     }
-
-    // Структура для регистрации класса окна
+    
     [StructLayout(LayoutKind.Sequential)]
     public struct WNDCLASS
     {

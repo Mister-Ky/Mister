@@ -19,10 +19,8 @@ namespace Mister.Framework
         private const uint SWP_NOMOVE = 0x0002;
         private const int PS_SOLID = 0;
 
-        // HWND_MESSAGE constant
         private static readonly IntPtr HWND_MESSAGE = new IntPtr(-3);
 
-        // Window styles
         private const int WS_OVERLAPPED = 0x00000000;
         private const int WS_CAPTION = 0x00C00000;
         private const int WS_SYSMENU = 0x00080000;
@@ -31,7 +29,6 @@ namespace Mister.Framework
         private const int WS_THICKFRAME = 0x00040000;
         private const int WS_VISIBLE = 0x10000000;
 
-        // Window messages
         private const int WM_PAINT = 0x000F;
         private const int WM_CLOSE = 0x0010;
         private const int WM_QUIT = 0x0012;
@@ -80,7 +77,6 @@ namespace Mister.Framework
         {
             string className = "MisterGraphics";
 
-            // Регистрируем класс окна
             wc.style = 0;
             windowProcDelegate = new WindowProcDelegate(WindowProc);
             wc.lpfnWndProc = windowProcDelegate;
@@ -94,12 +90,10 @@ namespace Mister.Framework
             wc.lpszClassName = className;
             WindowsApi.RegisterClass(ref wc);
 
-            // Создаем окно
             hWnd = WindowsApi.CreateWindowEx(0, className, $"{WindowsName}", WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_VISIBLE, x, y, width, height, IntPtr.Zero, IntPtr.Zero, wc.hInstance, IntPtr.Zero);
             WindowsApi.ShowWindow(hWnd, 1);
             WindowsApi.UpdateWindow(hWnd);
 
-            // Получаем контекст устройства (Device Context)
             hdc = WindowsApi.GetDC(hWnd);
         }
 
@@ -126,18 +120,15 @@ namespace Mister.Framework
             switch (msg)
             {
                 case WM_PAINT:
-                    // Рисуем на окне
                     update(gameTime);
                     UpdateHdc();
                     draw(gameTime);
 
-                    // Инвалидируем окно для повторной отрисовки
                     InvalidateRectWind();
                     break;
 
                 case WM_CLOSE:
                 case WM_QUIT:
-                    // Завершаем программу при закрытии окна
                     exit();
                     Environment.Exit(0);
                     break;
@@ -208,7 +199,6 @@ namespace Mister.Framework
         }
     }
 
-    // Делегат для обработчика оконных сообщений
     public delegate IntPtr WindowProcDelegate(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
 
